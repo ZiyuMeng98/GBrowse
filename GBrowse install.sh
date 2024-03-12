@@ -18,7 +18,7 @@ make CXXFLAGS=-fPIC CFLAGS cppFLAGS=-fPIC
 cp .lib/x86_64/jkweb.a ./lib/
 ./Build installdeps
 #安装Bio:DB::BigFile模块提示”Can't find the bigWig.h and jkweb.a files ata this locations.”时。输入/opt/biosoft/kent/src路径
-#非默认模式下编译samtools，以安装Bio::DB::Sam模块
+#非默认模式下编译samtools，安装Bio::DB::Sam模块
 cd /opt/biosoft/samtools-0.1.19
 make clean 
 make CXXFLAGS=-fPIC CFLAGS=-fPIC CPPFLAGS=-fPIC
