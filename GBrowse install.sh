@@ -25,3 +25,5 @@ make CXXFLAGS=-fPIC CFLAGS=-fPIC CPPFLAGS=-fPIC
 ./Build installdeps
 #安装Bio::DB::Sam模块时输入/opt/biosoft/samtools-0.1.19\路径
 
+#运行Build.PL,检查缺失依赖项
+perl Build.PL
