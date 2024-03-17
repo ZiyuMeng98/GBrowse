@@ -9,7 +9,8 @@ perl Makefile.PL
 #安装GBrowse以来的Perl模块时可能有一部分模块无法安装，其中包括Bio:DB::BigFile和Bio::DB::Sam，可通过如下方法安装
 #安装USCS kent，安装Bio::DB::BigFile模块
 cd /opt/biosoft/
-wget http://hgdownload.cse.ucsc.edu/admin/jksrc.zip
+wget http://hgdownload.cse.ucsc.edu/admin/jksrc.archive/jksrc.v330.zip
+#最新的kent无法编译出所需的jkweb.a文件
 unzip jksrc.zip
 cd kent/src 
 export MACHTYPE=X86_64
@@ -25,5 +26,33 @@ make CXXFLAGS=-fPIC CFLAGS=-fPIC CPPFLAGS=-fPIC
 ./Build installdeps
 #安装Bio::DB::Sam模块时输入/opt/biosoft/samtools-0.1.19\路径
 
+# build utilities
+yum install make gcc gmp-devel
+
+#Utilities to help with fetching components distributed in source code
+yum install wget git
+
+#apache2
+yum install httpd mod_fcgid fcgi-perl
+
+# various Perl modules
+yum install perl-GD perl-Module-Build perl-CPAN perl-IO-String perl-Capture-Tiny perl-CGI-Session \
+            perl-JSON perl-JSON-Any perl-libwww-perl perl-DBD-SQLite perl-File-NFSLock perl-Net-SMTP-SSL \
+            perl-Crypt-SSLeay perl-Net-SSLeay perl-Template-Toolkit
+
+# bioperl
+yum install perl-bioperl perl-Bio-Graphics
+
+#optionally...
+yum install mysql-server mysql-libs perl-DBD-MySQL
+yum install postgresql postgresql-server perl-DBD-Pg
+yum install inkscape
+yum install perl-GD-SVG
+
+perl -MCPAN -e 'install Bio::Perl'
+
 #运行Build.PL,检查缺失依赖项
 perl Build.PL
+./Build test
+#似乎可以忽略
+./Build install
